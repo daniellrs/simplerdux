@@ -1,8 +1,8 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', '../actions', 'reduxFieldsStore'], factory);
+    define(['exports', './actions', './reduxFieldsStore'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('../actions'), require('reduxFieldsStore'));
+    factory(exports, require('./actions'), require('./reduxFieldsStore'));
   } else {
     var mod = {
       exports: {}
@@ -165,13 +165,13 @@
   };
 
   var getAllFields = exports.getAllFields = function getAllFields() {
-    var fields = _reduxFieldsStore2.default.getStore().getState().fields;
+    var fields = getStoreState().fields;
     return fields;
   };
 
   var reduxField = function reduxField(field, key, value, propAux) {
 
-    var fields = (typeof propAux === 'undefined' ? 'undefined' : _typeof(propAux)) === 'object' ? propAux : _reduxFieldsStore2.default.getStore().getState().fields;
+    var fields = (typeof propAux === 'undefined' ? 'undefined' : _typeof(propAux)) === 'object' ? propAux : getStoreState().fields;
     fields = JSON.parse(JSON.stringify(fields));
 
     var path = field.split(".");
@@ -218,5 +218,9 @@
     }
 
     return fieldObject;
+  };
+
+  var getStoreState = function getStoreState() {
+    return _reduxFieldsStore2.default.getStore().getState()['fieldsReduxReducer'] ? _reduxFieldsStore2.default.getStore().getState()['fieldsReduxReducer'] : _reduxFieldsStore2.default.getStore().getState();
   };
 });

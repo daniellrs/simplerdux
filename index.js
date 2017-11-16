@@ -1,1 +1,1 @@
-module.exports = require('./dist/SAlert');
+module.exports = require('./dist/index.js');

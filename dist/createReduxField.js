@@ -134,7 +134,9 @@
     };
 
     var mapStateToProps = function mapStateToProps(state) {
-      return { fields: state.fields };
+      var fields = state['fieldsReduxReducer'] ? state['fieldsReduxReducer'].fields : state.fields;
+
+      return { fields: fields };
     };
 
     return (0, _reactRedux.connect)(mapStateToProps)(HOCComponent);
