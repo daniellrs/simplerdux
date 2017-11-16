@@ -1,17 +1,17 @@
 {
-  "name": "react-s-alert",
+  "name": "fields-redux",
   "version": "1.3.2",
-  "description": "Alerts / Notifications for React with rich configuration options",
+  "description": "Save the state of your fields in redux.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/juliancwirko/react-s-alert.git"
+    "url": "https://github.com/daniellrs/fields-redux.git"
   },
   "author": "Julian Ćwirko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/juliancwirko/react-s-alert/issues"
+    "url": "https://github.com/daniellrs/fields-redux.git/issues"
   },
-  "homepage": "https://github.com/juliancwirko/react-s-alert",
+  "homepage": "https://github.com/daniellrs/fields-redux.git",
   "keywords": [
     "react-component",
     "react",
