@@ -1,12 +1,12 @@
 {
   "name": "fields-redux",
-  "version": "0.0.15",
+  "version": "0.0.1",
   "description": "Save the state of your fields in redux.",
   "repository": {
     "type": "git",
     "url": "https://github.com/daniellrs/fields-redux.git"
   },
-  "author": "Julian Ćwirko",
+  "author": "Daniel Schneider",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/daniellrs/fields-redux.git/issues"
@@ -15,15 +15,15 @@
   "keywords": [
     "react-component",
     "react",
-    "alert",
-    "alerts",
-    "react-alert",
-    "react-alerts",
-    "notifications",
-    "react-notifications",
-    "errors",
-    "react-errors",
-    "toastr"
+    "redux",
+    "react-redux",
+    "fields-redux",
+    "fields",
+    "state",
+    "components",
+    "redux-fields",
+    "fieldsRedux",
+    "field"
   ],
   "options": {
     "mocha": "--require scripts/mocha_runner lib/**/__tests__/**/*.js"
