@@ -22,12 +22,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
-import { reduxFieldsStore, fieldsReduxReducer } from 'fields-redux';
+import { fieldsReduxStore, fieldsReduxReducer } from 'fields-redux';
 import { Provider } from 'react-redux';
 
 const store = createStore(fieldsReduxReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-reduxFieldsStore.setStore( store );
+fieldsReduxStore.setStore( store );
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
@@ -36,7 +36,7 @@ registerServiceWorker();
 If you already have a reducer, use combineReducers from redux and put fieldsReduxReducer inside with your reducer.
 Note that the name passed in the combineReducers must be "fieldsReduxReducer".
 
-And don't forget to pass the store to reduxFieldsStore.setStore( store ).
+And don't forget to pass the store to fieldsReduxStore.setStore( store ).
 
 
 ### 2. Create a component
@@ -45,7 +45,7 @@ Here we will create a Simple Input component.
 
 ```
 import React, { Component } from 'react';
-import { createReduxField, setField, getField } from 'fields-redux';
+import { createField, setField, getField } from 'fields-redux';
 
 class Input extends Component {
   render() {
@@ -61,7 +61,7 @@ class Input extends Component {
   }
 }
 
-export default createReduxField( Input );
+export default createField( Input );
 ```
 
 Then we can use our new component like that:
@@ -97,7 +97,7 @@ export default App;
 
 ## Component properties
 
-When we create a component, we need to use createReduxField( component ).
+When we create a component, we need to use createField( component ).
 
 Then the component will receive 4 props:
 
@@ -105,5 +105,5 @@ Then the component will receive 4 props:
 | ------------- |:-------------:| ------------- |
 | field      | string | field is a required field. Is the name of the field. |
 | defaultValue      | string, number, array, object, boolean      | defaultValue is the initial value of the component.   |
-| fieldListener | function      |    fieldListener listen any change in the field object and return him. |
+| fieldListener | function      |    fieldListener listen any change in the field object and return it. |
 | destroyOnUnmount | boolean      |    If destroyOnUnmount is false, redux will keep the value of the component and when he mount again, the value is still be there. default = true.   |
