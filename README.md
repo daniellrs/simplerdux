@@ -45,17 +45,16 @@ Here we will create a Simple Input component.
 
 ```
 import React, { Component } from 'react';
-import { createField, setField, getField } from 'fields-redux';
+import { createField } from './lib';
 
 class Input extends Component {
   render() {
-    const { field } = this.props;
 
-    const value = getField( field ).value || '';
+    const value = this.props.getField().value || '';
 
     return (
       <div>
-        <input value={value} onChange={e => setField(field, 'value', e.target.value)} />
+        <input value={value} onChange={e => this.props.setField( {'value': e.target.value} )} />
       </div>
     );
   }

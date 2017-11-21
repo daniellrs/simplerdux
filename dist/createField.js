@@ -27,6 +27,26 @@
     };
   }
 
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -80,9 +100,22 @@
       _inherits(HOCComponent, _Component);
 
       function HOCComponent() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, HOCComponent);
 
-        return _possibleConstructorReturn(this, (HOCComponent.__proto__ || Object.getPrototypeOf(HOCComponent)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HOCComponent.__proto__ || Object.getPrototypeOf(HOCComponent)).call.apply(_ref, [this].concat(args))), _this), _this.getField = function (field) {
+          return field ? (0, _fieldsRedux.getField)(field) : (0, _fieldsRedux.getField)(_this.props.field);
+        }, _this.setField = function (p1, p2) {
+          var value = (typeof p1 === 'undefined' ? 'undefined' : _typeof(p1)) === 'object';
+          (0, _fieldsRedux.setField)(value ? _this.props.field : p1, value ? p1 : p2);
+        }, _temp), _possibleConstructorReturn(_this, _ret);
       }
 
       _createClass(HOCComponent, [{
@@ -119,7 +152,7 @@
       }, {
         key: 'render',
         value: function render() {
-          return _react2.default.createElement(WrappedComponent, this.props);
+          return _react2.default.createElement(WrappedComponent, _extends({ getField: this.getField, setField: this.setField }, this.props));
         }
       }]);
 

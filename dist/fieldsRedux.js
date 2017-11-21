@@ -45,21 +45,6 @@
     }
   }
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
   var _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
@@ -148,16 +133,16 @@
     return reduxField(field);
   };
 
-  var setField = exports.setField = function setField(field, key, value) {
-    return reduxField(field, key, value);
+  var setField = exports.setField = function setField(field, value) {
+    return reduxField(field, value);
   };
 
   var destroyField = exports.destroyField = function destroyField(field) {
-    return reduxField(field, undefined, undefined, 'remove');
+    return reduxField(field, undefined, 'remove');
   };
 
   var getDefinedPropsField = exports.getDefinedPropsField = function getDefinedPropsField(field, props) {
-    return reduxField(field, undefined, undefined, props);
+    return reduxField(field, undefined, props);
   };
 
   var clearAllFields = exports.clearAllFields = function clearAllFields() {
@@ -169,7 +154,7 @@
     return fields;
   };
 
-  var reduxField = function reduxField(field, key, value, propAux) {
+  var reduxField = function reduxField(field, value, propAux) {
 
     var fields = (typeof propAux === 'undefined' ? 'undefined' : _typeof(propAux)) === 'object' ? propAux : getStoreState().fields;
     fields = JSON.parse(JSON.stringify(fields));
@@ -189,10 +174,8 @@
           temp = fields;
         }
 
-        if (key && typeof value !== 'undefined') {
-          temp[part] = _extends({}, temp[part], _defineProperty({}, key, value));
-        } else if (key) {
-          temp[part] = _extends({}, temp[part], key);
+        if (value) {
+          temp[part] = _extends({}, temp[part], value);
         } else if (typeof propAux === 'string' && propAux === 'remove') {
           delete temp[part];
         }
@@ -213,7 +196,7 @@
       return undefined;
     });
 
-    if (key || typeof propAux === 'string' && propAux === 'remove') {
+    if (value || typeof propAux === 'string' && propAux === 'remove') {
       _fieldsReduxStore2.default.getStore().dispatch(fieldsRedux.setFields(fields));
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "fields-redux",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Save the state of your fields in redux.",
   "repository": {
     "type": "git",
