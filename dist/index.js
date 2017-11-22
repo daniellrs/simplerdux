@@ -1,28 +1,30 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', './fieldsRedux', './createField', './fieldsReduxStore', './reducers'], factory);
+    define(['exports', './fieldsRedux', './createField', './fieldsReduxStore', './reducers', './fieldsState'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./fieldsRedux'), require('./createField'), require('./fieldsReduxStore'), require('./reducers'));
+    factory(exports, require('./fieldsRedux'), require('./createField'), require('./fieldsReduxStore'), require('./reducers'), require('./fieldsState'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.fieldsRedux, global.createField, global.fieldsReduxStore, global.reducers);
+    factory(mod.exports, global.fieldsRedux, global.createField, global.fieldsReduxStore, global.reducers, global.fieldsState);
     global.index = mod.exports;
   }
-})(this, function (exports, _fieldsRedux, _createField, _fieldsReduxStore, _reducers) {
+})(this, function (exports, _fieldsRedux, _createField, _fieldsReduxStore, _reducers, _fieldsState) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.fieldsReduxReducer = exports.fieldsReduxStore = exports.createField = exports.getAllFields = exports.clearAllFields = exports.getDefinedPropsField = exports.destroyField = exports.setField = exports.getField = exports.fieldChangeListener = exports.getObjectFieldsKey = exports.initializeField = undefined;
+  exports.fieldsState = exports.fieldsReduxReducer = exports.fieldsReduxStore = exports.createField = exports.getAllFields = exports.clearAllFields = exports.getDefinedPropsField = exports.destroyField = exports.setField = exports.getField = exports.fieldChangeListener = exports.getObjectFieldsKey = exports.initializeField = undefined;
 
   var _createField2 = _interopRequireDefault(_createField);
 
   var _fieldsReduxStore2 = _interopRequireDefault(_fieldsReduxStore);
 
   var _reducers2 = _interopRequireDefault(_reducers);
+
+  var _fieldsState2 = _interopRequireDefault(_fieldsState);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -42,4 +44,5 @@
   exports.createField = _createField2.default;
   exports.fieldsReduxStore = _fieldsReduxStore2.default;
   exports.fieldsReduxReducer = _reducers2.default;
+  exports.fieldsState = _fieldsState2.default;
 });

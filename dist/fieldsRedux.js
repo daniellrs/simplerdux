@@ -107,9 +107,9 @@
     });
   };
 
-  var fieldChangeListener = exports.fieldChangeListener = function fieldChangeListener(field, fieldListener, prevProps) {
+  var fieldChangeListener = exports.fieldChangeListener = function fieldChangeListener(field, fieldDidUpdate, prevProps) {
 
-    if (fieldListener) {
+    if (fieldDidUpdate) {
 
       var fieldObject = getField(field);
       var prevFieldAux = getDefinedPropsField(field, prevProps);
@@ -124,7 +124,7 @@
       });
 
       if (changed) {
-        fieldListener(fieldObject);
+        fieldDidUpdate(fieldObject, prevFieldAux);
       }
     }
   };

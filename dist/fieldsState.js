@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'react', 'prop-types', 'react-redux', './reduxFields'], factory);
+    define(['exports', 'react', 'react-redux'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('react'), require('prop-types'), require('react-redux'), require('./reduxFields'));
+    factory(exports, require('react'), require('react-redux'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.propTypes, global.reactRedux, global.reduxFields);
-    global.createReduxField = mod.exports;
+    factory(mod.exports, global.react, global.reactRedux);
+    global.fieldsState = mod.exports;
   }
-})(this, function (exports, _react, _propTypes, _reactRedux, _reduxFields) {
+})(this, function (exports, _react, _reactRedux) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -18,8 +18,6 @@
   });
 
   var _react2 = _interopRequireDefault(_react);
-
-  var _propTypes2 = _interopRequireDefault(_propTypes);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -75,7 +73,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var createReduxField = function createReduxField(WrappedComponent) {
+  var fieldsState = function fieldsState(WrappedComponent) {
     var HOCComponent = function (_Component) {
       _inherits(HOCComponent, _Component);
 
@@ -86,37 +84,6 @@
       }
 
       _createClass(HOCComponent, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-          var _props = this.props,
-              field = _props.field,
-              defaultValue = _props.defaultValue;
-
-          (0, _reduxFields.initializeField)(field, defaultValue);
-        }
-      }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps, prevState) {
-          var _props2 = this.props,
-              field = _props2.field,
-              fieldDidUpdate = _props2.fieldDidUpdate;
-
-          (0, _reduxFields.fieldChangeListener)(field, fieldDidUpdate, prevProps.fields);
-        }
-      }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-          var _props3 = this.props,
-              field = _props3.field,
-              _props3$destroyOnUnmo = _props3.destroyOnUnmount,
-              destroyOnUnmount = _props3$destroyOnUnmo === undefined ? true : _props3$destroyOnUnmo;
-
-
-          if (destroyOnUnmount) {
-            (0, _reduxFields.destroyField)(field);
-          }
-        }
-      }, {
         key: 'render',
         value: function render() {
           return _react2.default.createElement(WrappedComponent, this.props);
@@ -125,13 +92,6 @@
 
       return HOCComponent;
     }(_react.Component);
-
-    HOCComponent.propTypes = {
-      field: _propTypes2.default.string.isRequired,
-      defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string, _propTypes2.default.object, _propTypes2.default.array]),
-      fieldDidUpdate: _propTypes2.default.func,
-      destroyOnUnmount: _propTypes2.default.bool
-    };
 
     var mapStateToProps = function mapStateToProps(state) {
       var fields = state['fieldsReduxReducer'] ? state['fieldsReduxReducer'].fields : state.fields;
@@ -142,5 +102,5 @@
     return (0, _reactRedux.connect)(mapStateToProps)(HOCComponent);
   };
 
-  exports.default = createReduxField;
+  exports.default = fieldsState;
 });

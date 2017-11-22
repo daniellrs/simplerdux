@@ -132,9 +132,9 @@
         value: function componentDidUpdate(prevProps, prevState) {
           var _props2 = this.props,
               field = _props2.field,
-              fieldListener = _props2.fieldListener;
+              fieldDidUpdate = _props2.fieldDidUpdate;
 
-          (0, _fieldsRedux.fieldChangeListener)(field, fieldListener, prevProps.fields);
+          (0, _fieldsRedux.fieldChangeListener)(field, fieldDidUpdate, prevProps.fields);
         }
       }, {
         key: 'componentWillUnmount',
@@ -162,7 +162,7 @@
     HOCComponent.propTypes = {
       field: _propTypes2.default.string.isRequired,
       defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string, _propTypes2.default.object, _propTypes2.default.array]),
-      fieldListener: _propTypes2.default.func,
+      fieldDidUpdate: _propTypes2.default.func,
       destroyOnUnmount: _propTypes2.default.bool
     };
 
