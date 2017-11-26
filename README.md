@@ -1,6 +1,7 @@
-# fields-redux
+# Simplerdux
 
-Fields-redux is used to save the state of your React components in Redux.
+Simplerdux is a library to help you to create components or just put things in redux in a simple way.
+With Simplerdux you dont need to create a reducer and action file, just let Simplerdux deal with that for you.
 
 ## Usage
 
@@ -10,11 +11,11 @@ Here is what you need to do to make it work.
 ### 1. Install the package
 
 ```
-npm install fields-redux --save
+npm install simplerdux --save
 or
-yarn add fields-redux
+yarn add simplerdux
 ```
-### 2. Pass store to fields-redux
+### 2. Pass store to simplerdux
 
   If you don't have any other reducer, then you can do that:
 ```
@@ -22,7 +23,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
-import { fieldsReduxStore, fieldsReduxReducer } from 'fields-redux';
+import { fieldsReduxStore, fieldsReduxReducer } from 'simplerdux';
 import { Provider } from 'react-redux';
 
 const store = createStore(fieldsReduxReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -45,7 +46,7 @@ Here we will create a Simple Input component.
 
 ```
 import React, { Component } from 'react';
-import { createField } from './lib';
+import { createField } from 'simplerdux';
 
 class Input extends Component {
   render() {
@@ -67,7 +68,7 @@ Then we can use our new component like that:
 ```
 import React, { Component } from 'react';
 import Input from './Input';
-import { getObjectFieldsKey } from 'fields-redux';
+import { getObjectFieldsKey } from 'simplerdux';
 
 class App extends Component {
 

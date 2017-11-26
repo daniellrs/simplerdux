@@ -1,29 +1,32 @@
 {
-  "name": "fields-redux",
-  "version": "0.0.19",
-  "description": "Save the state of your fields in redux.",
+  "name": "simplerdux",
+  "version": "0.0.3",
+  "description": "Simplerdux is a library to help you to create components or just put things in redux in a simple way.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/daniellrs/fields-redux.git"
+    "url": "https://github.com/daniellrs/simplerdux"
   },
   "author": "Daniel Schneider",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/daniellrs/fields-redux.git/issues"
+    "url": "https://github.com/daniellrs/simplerdux/issues"
   },
-  "homepage": "https://github.com/daniellrs/fields-redux.git",
+  "homepage": "https://github.com/daniellrs/simplerdux",
   "keywords": [
     "react-component",
     "react",
     "redux",
     "react-redux",
-    "fields-redux",
+    "simplerdux",
     "fields",
     "state",
     "components",
     "redux-fields",
     "fieldsRedux",
-    "field"
+    "field",
+    "simplerdux",
+    "simpler-redux",
+    "simpler redux"
   ],
   "options": {
     "mocha": "--require scripts/mocha_runner lib/**/__tests__/**/*.js"
