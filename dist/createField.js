@@ -115,6 +115,12 @@
         }, _this.setField = function (p1, p2) {
           var value = (typeof p1 === 'undefined' ? 'undefined' : _typeof(p1)) === 'object';
           (0, _fieldsRedux.setField)(value ? _this.props.field : p1, value ? p1 : p2);
+        }, _this.destroyField = function (field) {
+          (0, _fieldsRedux.destroyField)(field ? field : _this.props.field);
+        }, _this.getDefinedPropsField = function (p1, p2) {
+          return (0, _fieldsRedux.getDefinedPropsField)(p2 ? p1 : _this.props.field, p2 ? p2 : p1);
+        }, _this.getObjectFieldsKey = function (p1, p2) {
+          return (0, _fieldsRedux.getObjectFieldsKey)(p2 ? p1 : _this.props.field, p2 ? p2 : p1);
         }, _temp), _possibleConstructorReturn(_this, _ret);
       }
 
@@ -152,7 +158,13 @@
       }, {
         key: 'render',
         value: function render() {
-          return _react2.default.createElement(WrappedComponent, _extends({ getField: this.getField, setField: this.setField }, this.props));
+          return _react2.default.createElement(WrappedComponent, _extends({
+            getField: this.getField,
+            setField: this.setField,
+            destroyField: this.destroyField,
+            getDefinedPropsField: this.getDefinedPropsField,
+            getObjectFieldsKey: this.getObjectFieldsKey
+          }, this.props));
         }
       }]);
 
