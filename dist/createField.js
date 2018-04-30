@@ -127,28 +127,26 @@
       _createClass(HOCComponent, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-          var _props = this.props,
-              field = _props.field,
-              defaultValue = _props.defaultValue;
+          var field = this.props.field;
 
-          (0, _fieldsRedux.initializeField)(field, defaultValue);
+          (0, _fieldsRedux.initializeField)(field);
         }
       }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps, prevState) {
-          var _props2 = this.props,
-              field = _props2.field,
-              fieldDidUpdate = _props2.fieldDidUpdate;
+          var _props = this.props,
+              field = _props.field,
+              fieldDidUpdate = _props.fieldDidUpdate;
 
           (0, _fieldsRedux.fieldChangeListener)(field, fieldDidUpdate, prevProps.fields);
         }
       }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-          var _props3 = this.props,
-              field = _props3.field,
-              _props3$destroyOnUnmo = _props3.destroyOnUnmount,
-              destroyOnUnmount = _props3$destroyOnUnmo === undefined ? true : _props3$destroyOnUnmo;
+          var _props2 = this.props,
+              field = _props2.field,
+              _props2$destroyOnUnmo = _props2.destroyOnUnmount,
+              destroyOnUnmount = _props2$destroyOnUnmo === undefined ? true : _props2$destroyOnUnmo;
 
 
           if (destroyOnUnmount) {
@@ -173,7 +171,6 @@
 
     HOCComponent.propTypes = {
       field: _propTypes2.default.string.isRequired,
-      defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string, _propTypes2.default.object, _propTypes2.default.array]),
       fieldDidUpdate: _propTypes2.default.func,
       destroyOnUnmount: _propTypes2.default.bool
     };

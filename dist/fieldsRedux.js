@@ -65,18 +65,15 @@
     return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   };
 
-  var initializeField = exports.initializeField = function initializeField(field, defaultValue) {
+  var initializeField = exports.initializeField = function initializeField(field) {
 
     var fieldObject = getField(field);
 
     if (!fieldObject.initialized) {
 
-      defaultValue = typeof defaultValue !== 'undefined' ? defaultValue : '';
-
       var fieldValue = {
         initialized: true,
-        value: fieldObject.value ? fieldObject.value : defaultValue,
-        defaultValue: defaultValue,
+        value: fieldObject.value,
         type: 'field'
       };
 
