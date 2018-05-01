@@ -82,9 +82,7 @@
   };
 
   var getObjectFieldsKey = exports.getObjectFieldsKey = function getObjectFieldsKey(field, key) {
-
     var fieldObject = getField(field);
-
     var obj = {};
 
     objectFieldsKeyFinder(obj, fieldObject, key);
@@ -126,8 +124,46 @@
     }
   };
 
-  var getField = exports.getField = function getField(field) {
-    return reduxField(field);
+  var getField = exports.getField = function getField(field, props) {
+
+    if (!field) {
+      console.error('A field name must be declared to get the field object');
+      return {};
+    }
+
+    var fieldObject = {};
+    var path = field.split('.');
+
+    try {
+      fieldObject = props || getAllFields();
+
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = path[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var part = _step.value;
+
+          fieldObject = fieldObject[part];
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    } catch (e) {}
+
+    return fieldObject || {};
   };
 
   var setField = exports.setField = function setField(field, value) {
@@ -135,11 +171,11 @@
   };
 
   var destroyField = exports.destroyField = function destroyField(field) {
-    return reduxField(field, undefined, 'remove');
+    return reduxField(field, undefined, true);
   };
 
   var getDefinedPropsField = exports.getDefinedPropsField = function getDefinedPropsField(field, props) {
-    return reduxField(field, undefined, props);
+    return getField(field, props);
   };
 
   var clearAllFields = exports.clearAllFields = function clearAllFields() {
@@ -147,16 +183,46 @@
   };
 
   var getAllFields = exports.getAllFields = function getAllFields() {
-    var fields = getStoreState().fields;
-    return fields;
+    return getStoreState().fields;
   };
 
-  var reduxField = function reduxField(field, value, propAux) {
+  var idkeychanger = 0;
 
-    var fields = (typeof propAux === 'undefined' ? 'undefined' : _typeof(propAux)) === 'object' ? propAux : getStoreState().fields;
-    fields = JSON.parse(JSON.stringify(fields));
+  var reduxField = function reduxField(field, value, remove) {
 
-    var path = field.split(".");
+    if (!field) {
+      console.error('A field name must be declared');
+      return;
+    }
+
+    var fields = {};
+    var allFields = getAllFields();
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = Object.keys(allFields)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var key = _step2.value;
+
+        fields[key] = _extends({}, allFields[key]);
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
+    }
+
+    var path = field.split('.');
     var temp = {};
     var fieldObject = void 0;
 
@@ -173,7 +239,7 @@
 
         if (value) {
           temp[part] = _extends({}, temp[part], value);
-        } else if (typeof propAux === 'string' && propAux === 'remove') {
+        } else if (remove) {
           delete temp[part];
         }
 
@@ -193,7 +259,7 @@
       return undefined;
     });
 
-    if (value || typeof propAux === 'string' && propAux === 'remove') {
+    if (value || remove) {
       _fieldsReduxStore2.default.getStore().dispatch(fieldsRedux.setFields(fields));
     }
 

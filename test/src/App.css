@@ -1,0 +1,47 @@
+.sd-notification {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+}
+
+.sd-notification-appear {
+  animation-name: notificationappear;
+  animation-fill-mode: forwards;
+  animation-duration: 300ms;
+  height: 50px;
+}
+
+@keyframes notificationappear {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 50px;
+  }
+}
+
+.sd-notification-disappear {
+  animation-name: notificationdisappear;
+  animation-fill-mode: forwards;
+  animation-duration: 300ms;
+}
+
+@keyframes notificationdisappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.notification-success {
+  width: 140px;
+  padding: 10px;
+  background-color: #5d89e8;
+  border: 1px solid #4674d7;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 1px 1px 12px -2px #272933;
+  text-align: center;
+}

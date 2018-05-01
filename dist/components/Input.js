@@ -203,7 +203,6 @@
           case 'button':
             break;
           case 'check':
-            // value = type === 'radio' ? value.toString() : value;
             inputProps['checked'] = value ? value.indexOf(optionValue) < 0 ? false : true : false;
             break;
           case 'color':
@@ -329,17 +328,9 @@
 
   Input.propTypes = {
     field: _propTypes2.default.string.isRequired,
-    ajax: _propTypes2.default.bool,
-    onChange: _propTypes2.default.func,
-    action: _propTypes2.default.string,
-    dados: _propTypes2.default.object,
-    receiveUpdates: _propTypes2.default.array,
-    sendUpdates: _propTypes2.default.array,
-    onFieldSuccess: _propTypes2.default.func,
-    onActionSuccess: _propTypes2.default.func,
-    onAllUpdated: _propTypes2.default.func,
-    fieldListener: _propTypes2.default.func,
+    fieldDidUpdate: _propTypes2.default.func,
     destroyOnUnmount: _propTypes2.default.bool,
+    onChange: _propTypes2.default.func,
     mask: _propTypes2.default.string,
     type: _propTypes2.default.oneOf(['time', 'date', 'datetime-local', 'email', 'url', 'month', 'week', 'number', 'password', 'search', 'button', 'submit', 'file', 'checkbox', 'radio', 'color', 'hidden', 'range', 'text']),
     placeholder: _propTypes2.default.string,

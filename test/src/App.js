@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import { fieldsState } from '../../dist/';
-import { Input } from '../../dist/components/';
-import Notification from './Notification';
+import { Input, Notification } from '../../dist/components/';
 
 class App extends Component {
 
   componentDidMount() {
+    this.props.setField( 'notification.text', {value: 'Mensagem de Alerta'} );
+    this.props.setField( 'timer', {value: '5000'} );
     this.props.setField( 'type', {value: 'success'} );
   }
 
@@ -15,12 +16,11 @@ class App extends Component {
 
     const notifications = getField( 'notification' ).value;
     notifications.push( {
-      text: getField( 'text' ).value,
+      text: getField( 'notification.text' ).value,
       type: getField( 'type' ).value,
-      timer: 3000
+      timer: getField( 'timer' ).value,
     } );
 
-    setField( 'text', {value: '' } );
     setField( 'notification', {value: notifications } );
   }
 
@@ -28,7 +28,8 @@ class App extends Component {
     return (
       <div>
           <form onSubmit={( e ) => e.preventDefault( )}>
-              <Input field='text' placeholder='Mensagem...' />
+              <Input field='notification.text' placeholder='Mensagem...' fieldDidUpdate={console.log} />
+              <Input field='timer' placeholder='Tempo em ms...' />
 
               <Input id='ts' field='type' type='radio' optionValue='success' />
               <label htmlFor='ts'>success</label>
@@ -42,8 +43,16 @@ class App extends Component {
           </form>
 
           <br />
+          {JSON.stringify( this.props.getField( 'notification' ) )}
           <br />
-          <Notification field='notification' />
+
+          <Notification field='notification' appearClass='sd-notification-appear' disappearClass='sd-notification-disappear' disappearTimer={300} popUps={{
+              success: ( s ) => <div className='notification-success'>{s.text}</div>,
+              info: ( s ) => <h1 style={{background: 'blue', color: '#fff'}}>{s.text}</h1>,
+              warning: ( s ) => <h1 style={{background: 'yellow', color: '#fff'}}>{s.text}</h1>,
+              danger: ( s ) => <h1 style={{background: 'red', color: '#fff'}}>{s.text}</h1>,
+          }} />
+
       </div>
     );
   }
