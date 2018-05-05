@@ -106,7 +106,8 @@
       return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Notification.__proto__ || Object.getPrototypeOf(Notification)).call.apply(_ref, [this].concat(args))), _this), _this.id = 0, _this.addToShowingList = function () {
         var _this$props = _this.props,
             getField = _this$props.getField,
-            setField = _this$props.setField;
+            setField = _this$props.setField,
+            audio = _this$props.audio;
 
         var value = getField().value;
 
@@ -120,6 +121,11 @@
           try {
             for (var _iterator = value[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
               var v = _step.value;
+
+              if (audio) {
+                var ad = new Audio(audio);
+                ad.play();
+              }
 
               showing.push(_extends({}, v, { id: ++_this.id }));
             }

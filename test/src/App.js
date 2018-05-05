@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { fieldsState, setObjectFieldsValue } from '../../dist/';
 import { Input, Notification } from '../../dist/components/';
+import notification from './notification_1.mp3';
 
 class App extends Component {
 
@@ -16,7 +17,7 @@ class App extends Component {
       trabalho: {nome: 'unimed', salario: 2000}
     }};
 
-    setObjectFieldsValue( 'pessoa', obj );
+    setObjectFieldsValue( 'pessoa', obj, true );
   }
 
   adicionaNotificacao = () => {
@@ -66,7 +67,7 @@ class App extends Component {
           {JSON.stringify( this.props.getField( 'notification' ) )}
           <br />
 
-          <Notification field='notification' appearClass='sd-notification-appear' disappearClass='sd-notification-disappear' disappearTimer={300} popUps={{
+          <Notification field='notification' appearClass='sd-notification-appear' disappearClass='sd-notification-disappear' audio={notification} disappearTimer={300} popUps={{
               success: ( s ) => <div className='notification-success'>{s.text}</div>,
               info: ( s ) => <h1 style={{background: 'blue', color: '#fff'}}>{s.text}</h1>,
               warning: ( s ) => <h1 style={{background: 'yellow', color: '#fff'}}>{s.text}</h1>,
