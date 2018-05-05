@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
-import { fieldsState } from '../../dist/';
+import { fieldsState, setObjectFieldsValue } from '../../dist/';
 import { Input, Notification } from '../../dist/components/';
 
 class App extends Component {
 
   componentDidMount() {
-    this.props.setField( 'notification.text', {value: 'Mensagem de Alerta'} );
-    this.props.setField( 'timer', {value: '5000'} );
-    this.props.setField( 'type', {value: 'success'} );
+    this.props.setField( 'notification.text', 'Mensagem de Alerta' );
+    this.props.setField( 'timer', '5000' );
+    this.props.setField( 'type', 'success' );
+
+    const obj = {nome: 'Daniel', idade: 22, altura: 1.77, sexo: 'Masculino', adjetivo: 'MERDÃO', estudo: {
+      ensinofundamental: 'Sinodal da paz',
+      ensinomedio: 'Liberato',
+      trabalho: {nome: 'unimed', salario: 2000}
+    }};
+
+    setObjectFieldsValue( 'pessoa', obj );
   }
 
   adicionaNotificacao = () => {
@@ -25,10 +33,22 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <div>
+          <Input field='pessoa.nome' />
+          <Input field='pessoa.idade' />
+          <Input field='pessoa.altura' />
+          <Input field='pessoa.sexo' />
+          <Input field='pessoa.adjetivo' />
+          <Input field='pessoa.estudo.ensinofundamental' />
+          <Input field='pessoa.estudo.ensinomedio' />
+          <Input field='pessoa.estudo.trabalho.nome' />
+          <Input field='pessoa.estudo.trabalho.salario' />
+
+          <h2>Notification</h2>
           <form onSubmit={( e ) => e.preventDefault( )}>
-              <Input field='notification.text' placeholder='Mensagem...' fieldDidUpdate={console.log} />
+              <Input field='notification.text' placeholder='Mensagem...' />
               <Input field='timer' placeholder='Tempo em ms...' />
 
               <Input id='ts' field='type' type='radio' optionValue='success' />

@@ -16,7 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.fieldsState = exports.fieldsReduxReducer = exports.fieldsReduxStore = exports.createField = exports.getAllFields = exports.clearAllFields = exports.getDefinedPropsField = exports.destroyField = exports.setField = exports.getField = exports.fieldChangeListener = exports.getObjectFieldsKey = exports.initializeField = undefined;
+  exports.setObjectFieldsValue = exports.fieldsState = exports.fieldsReduxReducer = exports.fieldsReduxStore = exports.createField = exports.getAllFields = exports.clearAllFields = exports.getDefinedPropsField = exports.destroyField = exports.setField = exports.getField = exports.fieldChangeListener = exports.getObjectFieldsKey = exports.initializeField = undefined;
 
   var _createField2 = _interopRequireDefault(_createField);
 
@@ -45,4 +45,5 @@
   exports.fieldsReduxStore = _fieldsReduxStore2.default;
   exports.fieldsReduxReducer = _reducers2.default;
   exports.fieldsState = _fieldsState2.default;
+  exports.setObjectFieldsValue = _fieldsRedux.setObjectFieldsValue;
 });

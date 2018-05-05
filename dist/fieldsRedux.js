@@ -16,7 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.getAllFields = exports.clearAllFields = exports.getDefinedPropsField = exports.destroyField = exports.setField = exports.getField = exports.fieldChangeListener = exports.getObjectFieldsKey = exports.initializeField = undefined;
+  exports.getAllFields = exports.clearAllFields = exports.getDefinedPropsField = exports.destroyField = exports.setField = exports.getField = exports.fieldChangeListener = exports.setObjectFieldsValue = exports.getObjectFieldsKey = exports.initializeField = undefined;
 
   var fieldsRedux = _interopRequireWildcard(_actions);
 
@@ -88,6 +88,21 @@
     objectFieldsKeyFinder(obj, fieldObject, key);
 
     return obj;
+  };
+
+  var setObjectFieldsValue = exports.setObjectFieldsValue = function setObjectFieldsValue(field, obj) {
+    for (var _len = arguments.length, recursive = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      recursive[_key - 2] = arguments[_key];
+    }
+
+    Object.keys(obj).map(function (k) {
+      if (recursive.length === 0 || !recursive[0] || _typeof(obj[k]) !== 'object' || Array.isArray(obj[k])) {
+        setField(field + '.' + k, obj[k]);
+      } else {
+        recursive.shift();
+        setObjectFieldsValue.apply(undefined, [field + '.' + k, obj[k]].concat(recursive));
+      }
+    });
   };
 
   var objectFieldsKeyFinder = function objectFieldsKeyFinder(obj, fieldObject, key) {
@@ -167,6 +182,11 @@
   };
 
   var setField = exports.setField = function setField(field, value) {
+
+    if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object' || Array.isArray(value)) {
+      value = { value: value };
+    }
+
     return reduxField(field, value);
   };
 
