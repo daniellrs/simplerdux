@@ -152,30 +152,10 @@
     try {
       fieldObject = props || getAllFields();
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = path[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var part = _step.value;
-
-          fieldObject = fieldObject[part];
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
+      path.map(function (p) {
+        fieldObject = fieldObject[p];
+        return undefined;
+      });
     } catch (e) {}
 
     return fieldObject || {};
@@ -216,31 +196,11 @@
     }
 
     var fields = {};
-    var allFields = getAllFields();
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-      for (var _iterator2 = Object.keys(allFields)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var key = _step2.value;
-
-        fields[key] = _extends({}, allFields[key]);
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
-    }
+    var allFields = getAllFields() || {};
+    Object.keys(allFields).map(function (k) {
+      fields[k] = _extends({}, allFields[k]);
+      return undefined;
+    });
 
     var path = field.split('.');
     var temp = {};
