@@ -1,6 +1,6 @@
 {
   "name": "simplerdux",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Simplerdux is a library to help you to create components or just put things in redux in a simple way.",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { fieldsState, setObjectFieldsValue } from '../../dist/';
+import { fieldsState, setObjectFieldsValue, getObjectFieldsKey } from '../../dist/';
 import { Input, Notification } from '../../dist/components/';
 import notification from './notification_1.mp3';
 
@@ -17,7 +17,7 @@ class App extends Component {
       trabalho: {nome: 'unimed', salario: 2000}
     }};
 
-    setObjectFieldsValue( 'pessoa', obj, true );
+    setObjectFieldsValue( 'pessoa', obj );
   }
 
   adicionaNotificacao = () => {
@@ -31,6 +31,8 @@ class App extends Component {
     } );
 
     setField( 'notification', {value: notifications } );
+
+    console.log( getObjectFieldsKey( 'pessoa', 'value' ) );
   }
 
   render() {

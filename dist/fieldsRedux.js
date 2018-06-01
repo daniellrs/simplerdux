@@ -73,8 +73,7 @@
 
       var fieldValue = {
         initialized: true,
-        value: fieldObject.value,
-        type: 'field'
+        value: fieldObject.value
       };
 
       setField(field, fieldValue);
@@ -107,7 +106,7 @@
 
   var objectFieldsKeyFinder = function objectFieldsKeyFinder(obj, fieldObject, key) {
     Object.keys(fieldObject).map(function (k) {
-      if (fieldObject[k].type === 'field') {
+      if (fieldObject[k] && fieldObject[k][key]) {
         obj[k] = fieldObject[k][key];
       }
       if (_typeof(fieldObject[k]) === 'object') {
