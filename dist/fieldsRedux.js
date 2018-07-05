@@ -65,7 +65,7 @@
     return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   };
 
-  var initializeField = exports.initializeField = function initializeField(field) {
+  var initializeField = exports.initializeField = function initializeField(field, defaultFieldValue) {
 
     var fieldObject = getField(field);
 
@@ -73,14 +73,16 @@
 
       var fieldValue = {
         initialized: true,
-        value: fieldObject.value
+        value: fieldObject.value || defaultFieldValue
       };
 
       setField(field, fieldValue);
     }
   };
 
-  var getObjectFieldsKey = exports.getObjectFieldsKey = function getObjectFieldsKey(field, key) {
+  var getObjectFieldsKey = exports.getObjectFieldsKey = function getObjectFieldsKey(field) {
+    var key = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'value';
+
     var fieldObject = getField(field);
     var obj = {};
 
@@ -95,8 +97,11 @@
     }
 
     Object.keys(obj).map(function (k) {
-      if (recursive.length === 0 || !recursive[0] || _typeof(obj[k]) !== 'object' || Array.isArray(obj[k])) {
-        setField(field + '.' + k, obj[k]);
+      if (recursive.length === 0 || !recursive[0] || _typeof(obj[k]) !== 'object') {
+
+        if (_typeof(obj[k]) !== 'object' || Array.isArray(obj[k])) {
+          setField(field + '.' + k, obj[k]);
+        }
       } else {
         recursive.shift();
         setObjectFieldsValue.apply(undefined, [field + '.' + k, obj[k]].concat(recursive));
@@ -184,8 +189,6 @@
   var getAllFields = exports.getAllFields = function getAllFields() {
     return getStoreState().fields;
   };
-
-  var idkeychanger = 0;
 
   var reduxField = function reduxField(field, value, remove) {
 

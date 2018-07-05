@@ -41,12 +41,6 @@
     return target;
   };
 
-  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  };
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -113,40 +107,47 @@
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HOCComponent.__proto__ || Object.getPrototypeOf(HOCComponent)).call.apply(_ref, [this].concat(args))), _this), _this.getField = function (field) {
           return field ? (0, _fieldsRedux.getField)(field) : (0, _fieldsRedux.getField)(_this.props.field);
         }, _this.setField = function (p1, p2) {
-          var value = (typeof p1 === 'undefined' ? 'undefined' : _typeof(p1)) === 'object';
-          (0, _fieldsRedux.setField)(value ? _this.props.field : p1, value ? p1 : p2);
+          if (typeof p2 === 'undefined') {
+            (0, _fieldsRedux.setField)(_this.props.field, p1);
+          } else {
+            (0, _fieldsRedux.setField)(p1, p2);
+          }
         }, _this.destroyField = function (field) {
           (0, _fieldsRedux.destroyField)(field ? field : _this.props.field);
         }, _this.getDefinedPropsField = function (p1, p2) {
-          return (0, _fieldsRedux.getDefinedPropsField)(p2 ? p1 : _this.props.field, p2 ? p2 : p1);
-        }, _this.getObjectFieldsKey = function (p1, p2) {
-          return (0, _fieldsRedux.getObjectFieldsKey)(p2 ? p1 : _this.props.field, p2 ? p2 : p1);
+          if (typeof p2 === 'undefined') {
+            return (0, _fieldsRedux.getDefinedPropsField)(_this.props.field, p1);
+          } else {
+            return (0, _fieldsRedux.getDefinedPropsField)(p1, p2);
+          }
         }, _temp), _possibleConstructorReturn(_this, _ret);
       }
 
       _createClass(HOCComponent, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-          var field = this.props.field;
+          var _props = this.props,
+              field = _props.field,
+              defaultFieldValue = _props.defaultFieldValue;
 
-          (0, _fieldsRedux.initializeField)(field);
+          (0, _fieldsRedux.initializeField)(field, defaultFieldValue);
         }
       }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps, prevState) {
-          var _props = this.props,
-              field = _props.field,
-              fieldDidUpdate = _props.fieldDidUpdate;
+          var _props2 = this.props,
+              field = _props2.field,
+              fieldDidUpdate = _props2.fieldDidUpdate;
 
           (0, _fieldsRedux.fieldChangeListener)(field, fieldDidUpdate, prevProps.fields);
         }
       }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-          var _props2 = this.props,
-              field = _props2.field,
-              _props2$destroyOnUnmo = _props2.destroyOnUnmount,
-              destroyOnUnmount = _props2$destroyOnUnmo === undefined ? true : _props2$destroyOnUnmo;
+          var _props3 = this.props,
+              field = _props3.field,
+              _props3$destroyOnUnmo = _props3.destroyOnUnmount,
+              destroyOnUnmount = _props3$destroyOnUnmo === undefined ? true : _props3$destroyOnUnmo;
 
 
           if (destroyOnUnmount) {
@@ -161,7 +162,8 @@
             setField: this.setField,
             destroyField: this.destroyField,
             getDefinedPropsField: this.getDefinedPropsField,
-            getObjectFieldsKey: this.getObjectFieldsKey
+            getObjectFieldsKey: _fieldsRedux.getObjectFieldsKey,
+            setObjectFieldsValue: _fieldsRedux.setObjectFieldsValue
           }, this.props));
         }
       }]);

@@ -92,38 +92,21 @@
       _inherits(HOCComponent, _Component);
 
       function HOCComponent() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
         _classCallCheck(this, HOCComponent);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HOCComponent.__proto__ || Object.getPrototypeOf(HOCComponent)).call.apply(_ref, [this].concat(args))), _this), _this.getField = function (field) {
-          return (0, _fieldsRedux.getField)(field);
-        }, _this.setField = function (field, value) {
-          (0, _fieldsRedux.setField)(field, value);
-        }, _this.destroyField = function (field) {
-          (0, _fieldsRedux.destroyField)(field);
-        }, _this.getDefinedPropsField = function (field, props) {
-          return (0, _fieldsRedux.getDefinedPropsField)(field, props);
-        }, _this.getObjectFieldsKey = function (field, key) {
-          return (0, _fieldsRedux.getObjectFieldsKey)(field, key);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        return _possibleConstructorReturn(this, (HOCComponent.__proto__ || Object.getPrototypeOf(HOCComponent)).apply(this, arguments));
       }
 
       _createClass(HOCComponent, [{
         key: 'render',
         value: function render() {
           return _react2.default.createElement(WrappedComponent, _extends({
-            getField: this.getField,
-            setField: this.setField,
-            destroyField: this.destroyField,
-            getDefinedPropsField: this.getDefinedPropsField,
-            getObjectFieldsKey: this.getObjectFieldsKey
+            getField: _fieldsRedux.getField,
+            setField: _fieldsRedux.setField,
+            destroyField: _fieldsRedux.destroyField,
+            getDefinedPropsField: _fieldsRedux.getDefinedPropsField,
+            getObjectFieldsKey: _fieldsRedux.getObjectFieldsKey,
+            setObjectFieldsValue: _fieldsRedux.setObjectFieldsValue
           }, this.props));
         }
       }]);

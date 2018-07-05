@@ -104,5 +104,6 @@ Then the component will receive 4 props:
 | Props       | type           | Cool  |
 | ------------- |:-------------:| ------------- |
 | field      | string | field is a required field. Is the name of the field. |
+| defaultFieldValue      | string | default value of the field. |
 | fieldDidUpdate | function      |    fieldDidUpdate listen any change in the field object and return it. |
 | destroyOnUnmount | boolean      |    If destroyOnUnmount is false, redux will keep the value of the component and when he mount again, the value is still be there. default = true.   |

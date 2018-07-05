@@ -3,12 +3,12 @@ import './App.css';
 import { fieldsState, setObjectFieldsValue, getObjectFieldsKey } from '../../dist/';
 import { Input, Notification } from '../../dist/components/';
 import notification from './notification_1.mp3';
+import Hoho from './Hoho';
 
 class App extends Component {
 
   componentDidMount() {
     this.props.setField( 'notification.text', 'Mensagem de Alerta' );
-    this.props.setField( 'timer', '5000' );
     this.props.setField( 'type', 'success' );
 
     const obj = {nome: 'Daniel', idade: 22, altura: 1.77, sexo: 'Masculino', adjetivo: 'MERDÃO', estudo: {
@@ -32,19 +32,26 @@ class App extends Component {
 
     setField( 'notification', {value: notifications } );
 
-    console.log( getObjectFieldsKey( 'pessoa', 'value' ) );
+    console.log( getObjectFieldsKey( 'pessoa' ) );
   }
 
   render() {
 
     return (
       <div>
+          <Hoho field='hoho' />
+          <hr />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <Input field='pessoa.nome' />
           <Input field='pessoa.idade' />
           <Input field='pessoa.altura' />
           <Input field='pessoa.sexo' />
           <Input field='pessoa.adjetivo' />
-          <Input field='pessoa.estudo.ensinofundamental' />
+          <Input field='pessoa.estudo.ensinofundamental' defaultFieldValue='default value' />
           <Input field='pessoa.estudo.ensinomedio' />
           <Input field='pessoa.estudo.trabalho.nome' />
           <Input field='pessoa.estudo.trabalho.salario' />
@@ -52,7 +59,7 @@ class App extends Component {
           <h2>Notification</h2>
           <form onSubmit={( e ) => e.preventDefault( )}>
               <Input field='notification.text' placeholder='Mensagem...' />
-              <Input field='timer' placeholder='Tempo em ms...' />
+              <Input field='timer' defaultFieldValue='5000' placeholder='Tempo em ms...' />
 
               <Input id='ts' field='type' type='radio' optionValue='success' />
               <label htmlFor='ts'>success</label>
