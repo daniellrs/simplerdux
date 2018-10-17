@@ -131,13 +131,13 @@ getTokenBack = () => {
 
 Here is all the available Simplerdux functions that you can import.
 
-**createField( component )**
+`**createField( component )**`
 This is a high order component and is used to create components and provide multiple useful functions in the props of these components.
 
-**fieldsState( component )**
+`**fieldsState( component )**`
 This is a high order component and is used to provide multiple useful functions in the props of a component. Besides that is used to rerender a component when some field changes.
 
-**getField( field(String) )**
+`**getField( field(String) )**`
 Function used to get the object of a field.
 
 ```
@@ -146,7 +146,7 @@ const someInput = getField( 'someField' );
 console.log( someInput ); // {value: 'Some input value'}
 ```
 
-**setField( field(String), obj(String, Number, Boolean, Object, Array) )**
+`**setField( field(String), obj(String, Number, Boolean, Object, Array) )**`
 Function used to set value of a field (works like setState, but with the name of the field in the first parameter). If the second parameter isn't an object then the value passed will update the value of the field object.
 
 ```
@@ -157,7 +157,7 @@ setField( 'someInput', 'This is the new value of the input' );
 // {value: 'This is the new value of the input', error: 'There is some error message in that input'}
 ```
 
-**getObjectFieldsKey( partOfField(String), key(String) )**
+`**getObjectFieldsKey( partOfField(String), key(String) )**`
 Create a object of multiple fields. The default value of key is 'value'.
 
 ```
@@ -169,7 +169,7 @@ const objPerson = getObjectFieldsKey( 'person' );
 console.log( objPerson ); // {name: 'Dylan', age: 35}
 ```
 
-**setObjectFieldsValue( partOfField(String), obj(Object), ...recursive )**
+`**setObjectFieldsValue( partOfField(String), obj(Object), ...recursive )**`
 Set the value of multiple fields of an object. The recursive option is optional and will enter in different levels of the object, if you want to enter 3 levels deep of the object then you will call 'setObjectFieldsValue( 'person', obj, true, true, true );'
 
 ```
@@ -181,16 +181,16 @@ console.log( getField( 'person.name' ) ); // {value: 'Brian'}
 console.log( getField( 'person.age' ) ); // {value: 29}
 ```
 
-**destroyField( field(String) )**
+`**destroyField( field(String) )**`
 Clear the specified field.
 
-**getAllFields( field(String) )**
+`**getAllFields( field(String) )**`
 Return all fields.
 
-**clearAllFields( field(String) )**
+`**clearAllFields( field(String) )**`
 Clear all fields.
 
-**getDefinedPropsField( field(String), prevFieldProps(Object) )**
+`**getDefinedPropsField( field(String), prevFieldProps(Object) )**`
 This function is used inside componentDidUpdate() or componentWillUpdate() function and is used to get the previous or the next value of a field.
 
 ```
@@ -214,6 +214,3 @@ componentDidUpdate( prevProps ) {
 
 export default fieldsState( Component ); // inject 'fields' props in the component
 ```
-
-**initializeField( field(String), defaultFieldValue(String, Number, Boolean, Object, Array) )**
-You probably don't will use that function. Function to initialize a field when the field will be used in a component.
