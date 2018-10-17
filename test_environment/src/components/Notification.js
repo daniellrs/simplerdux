@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { createField } from '../';
+import { createField } from '../../../dist/';
 
 class Notification extends Component {
   id = 0;

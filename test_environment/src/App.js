@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
-import { fieldsState, setObjectFieldsValue, getObjectFieldsKey } from '../../dist/';
-import { Input, Notification } from '../../dist/components/';
+import { fieldsState, setObjectFieldsValue, getObjectFieldsKey, getDefinedPropsField } from '../../dist/';
+import { Input, Notification } from './components';
 import notification from './notification_1.mp3';
 import Hoho from './Hoho';
 
 class App extends Component {
+  state = {
+    inputVl: '',
+  }
 
   componentDidMount() {
     this.props.setField( 'notification.text', 'Mensagem de Alerta' );
+
+    setTimeout( () => {
+        this.props.setField( 'notification.text', 'Mensagem de Alerta 1' );
+    }, 1000);
+
     this.props.setField( 'type', 'success' );
 
     const obj = {nome: 'Daniel', idade: 22, altura: 1.77, sexo: 'Masculino', adjetivo: 'MERDÃO', estudo: {
@@ -17,7 +25,13 @@ class App extends Component {
       trabalho: {nome: 'unimed', salario: 2000}
     }};
 
+
     setObjectFieldsValue( 'pessoa', obj );
+    console.log( getObjectFieldsKey( 'pessoa' ) );
+  }
+
+  componentDidUpdate( prevProps ) {
+    console.log(getDefinedPropsField( 'notification.text', prevProps.fields ));
   }
 
   adicionaNotificacao = () => {
@@ -31,8 +45,6 @@ class App extends Component {
     } );
 
     setField( 'notification', {value: notifications } );
-
-    console.log( getObjectFieldsKey( 'pessoa' ) );
   }
 
   render() {
@@ -46,6 +58,7 @@ class App extends Component {
           <br />
           <br />
           <br />
+          <Input onChange={t => this.setState( {inputVl: t} )} value={this.state.inputVl} />
           <Input field='pessoa.nome' />
           <Input field='pessoa.idade' />
           <Input field='pessoa.altura' />

@@ -67,6 +67,11 @@
 
   var initializeField = exports.initializeField = function initializeField(field, defaultFieldValue) {
 
+    if (!field) {
+      console.error('A field name must be declared (simplerdux internal function initializeField)');
+      return;
+    }
+
     var fieldObject = getField(field);
 
     if (!fieldObject.initialized) {
@@ -83,6 +88,12 @@
   var getObjectFieldsKey = exports.getObjectFieldsKey = function getObjectFieldsKey(field) {
     var key = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'value';
 
+
+    if (!field) {
+      console.error('A field name must be declared (simplerdux internal function getObjectFieldsKey)');
+      return;
+    }
+
     var fieldObject = getField(field);
     var obj = {};
 
@@ -94,6 +105,11 @@
   var setObjectFieldsValue = exports.setObjectFieldsValue = function setObjectFieldsValue(field, obj) {
     for (var _len = arguments.length, recursive = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
       recursive[_key - 2] = arguments[_key];
+    }
+
+    if (!field) {
+      console.error('A field name must be declared (simplerdux internal function setObjectFieldsValue)');
+      return;
     }
 
     Object.keys(obj).map(function (k) {
@@ -123,6 +139,11 @@
 
   var fieldChangeListener = exports.fieldChangeListener = function fieldChangeListener(field, fieldDidUpdate, prevProps) {
 
+    if (!field) {
+      console.error('A field name must be declared (simplerdux internal function fieldChangeListener)');
+      return;
+    }
+
     if (fieldDidUpdate) {
 
       var fieldObject = getField(field);
@@ -146,8 +167,8 @@
   var getField = exports.getField = function getField(field, props) {
 
     if (!field) {
-      console.error('A field name must be declared to get the field object');
-      return {};
+      console.error('A field name must be declared (simplerdux internal function getField)');
+      return;
     }
 
     var fieldObject = {};
@@ -167,6 +188,11 @@
 
   var setField = exports.setField = function setField(field, value) {
 
+    if (!field) {
+      console.error('A field name must be declared (simplerdux internal function setField)');
+      return;
+    }
+
     if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object' || Array.isArray(value)) {
       value = { value: value };
     }
@@ -175,10 +201,22 @@
   };
 
   var destroyField = exports.destroyField = function destroyField(field) {
+
+    if (!field) {
+      console.error('A field name must be declared (simplerdux internal function destroyField)');
+      return;
+    }
+
     return reduxField(field, undefined, true);
   };
 
   var getDefinedPropsField = exports.getDefinedPropsField = function getDefinedPropsField(field, props) {
+
+    if (!field) {
+      console.error('A field name must be declared (simplerdux internal function getDefinedPropsField)');
+      return;
+    }
+
     return getField(field, props);
   };
 
@@ -193,7 +231,7 @@
   var reduxField = function reduxField(field, value, remove) {
 
     if (!field) {
-      console.error('A field name must be declared');
+      console.error('A field name must be declared (simplerdux internal function reduxField)');
       return;
     }
 

@@ -6,7 +6,7 @@ class Hoho extends Component {
   componentDidMount() {
     setTimeout(() => {
 
-        console.log( this.props.setField( 'kkk' ) );
+        // console.log( this.props.setField( 'kkk' ) );
     }, 3000);
   }
 

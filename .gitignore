@@ -6,4 +6,5 @@
 .idea
 npm-debug.log
 node_modules
-test/node_modules
+test_environment/node_modules
+dist

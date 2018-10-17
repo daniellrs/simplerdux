@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-maskedinput';
-import { createField } from '../';
+import { createField } from '../../../dist/';
 
 class Input extends Component {
   confs = '';
 
   onChange = ( event ) => {
-    const { onChange, setField } = this.props;
+    const { field, onChange, setField } = this.props;
 
     let value = this.handleValue( event.target );
     value = this.handleWithTypeValues( value );
@@ -16,7 +16,7 @@ class Input extends Component {
       onChange( value );
     }
 
-    setField( {value} );
+    field && setField( {value} );
   }
 
   handleValue = ( target ) => {
@@ -25,10 +25,10 @@ class Input extends Component {
   }
 
   handleWithTypeValues = ( value ) => {
-    const { field, type, optionValue, getField } = this.props;
+    const { field, value: vl, type, optionValue, getField } = this.props;
 
     if( type === 'checkbox' ) {
-      const fieldValue = getField( field ).value || [];
+      const fieldValue = field ? getField( field ).value || [] : vl;
       const index = fieldValue.indexOf( optionValue );
 
       if( index < 0 ) {
@@ -54,11 +54,11 @@ class Input extends Component {
   }
 
   checkInputProps = ( ) => {
-    const { field, id, type = 'text', name = '', className = '', placeholder, min, max, step, maxLength, minLength, autoFocus, disabled, readOnly, required, style = {}, optionValue, getField } = this.props;
+    const { field, value: vl, id, type = 'text', name = '', className = '', placeholder, min, max, step, maxLength, minLength, autoFocus, disabled, readOnly, required, style = {}, optionValue, getField } = this.props;
 
     const confs = this.stateOptions( );
 
-    let value = getField( field ).value;
+    let value = field ? getField( field ).value : vl;
 
     let inputProps = {};
 
@@ -188,7 +188,7 @@ class Input extends Component {
 }
 
 Input.propTypes = {
-  field: PropTypes.string.isRequired,
+  field: PropTypes.string,
   fieldDidUpdate: PropTypes.func,
   destroyOnUnmount: PropTypes.bool,
   onChange: PropTypes.func,

@@ -130,7 +130,10 @@
               field = _props.field,
               defaultFieldValue = _props.defaultFieldValue;
 
-          (0, _fieldsRedux.initializeField)(field, defaultFieldValue);
+
+          if (field) {
+            (0, _fieldsRedux.initializeField)(field, defaultFieldValue);
+          }
         }
       }, {
         key: 'componentDidUpdate',
@@ -139,7 +142,10 @@
               field = _props2.field,
               fieldDidUpdate = _props2.fieldDidUpdate;
 
-          (0, _fieldsRedux.fieldChangeListener)(field, fieldDidUpdate, prevProps.fields);
+
+          if (field) {
+            (0, _fieldsRedux.fieldChangeListener)(field, fieldDidUpdate, prevProps.fields);
+          }
         }
       }, {
         key: 'componentWillUnmount',
@@ -150,7 +156,7 @@
               destroyOnUnmount = _props3$destroyOnUnmo === undefined ? true : _props3$destroyOnUnmo;
 
 
-          if (destroyOnUnmount) {
+          if (field && destroyOnUnmount) {
             (0, _fieldsRedux.destroyField)(field);
           }
         }
@@ -172,7 +178,7 @@
     }(_react.Component);
 
     HOCComponent.propTypes = {
-      field: _propTypes2.default.string.isRequired,
+      field: _propTypes2.default.string,
       fieldDidUpdate: _propTypes2.default.func,
       destroyOnUnmount: _propTypes2.default.bool
     };
