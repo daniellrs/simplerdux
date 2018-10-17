@@ -59,6 +59,21 @@
     return target;
   };
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
   var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
     return typeof obj;
   } : function (obj) {
@@ -103,9 +118,12 @@
   };
 
   var setObjectFieldsValue = exports.setObjectFieldsValue = function setObjectFieldsValue(field, obj) {
-    for (var _len = arguments.length, recursive = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      recursive[_key - 2] = arguments[_key];
+    for (var _len = arguments.length, recursive = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+      recursive[_key - 3] = arguments[_key];
     }
+
+    var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'value';
+
 
     if (!field) {
       console.error('A field name must be declared (simplerdux internal function setObjectFieldsValue)');
@@ -116,18 +134,18 @@
       if (recursive.length === 0 || !recursive[0] || _typeof(obj[k]) !== 'object') {
 
         if (_typeof(obj[k]) !== 'object' || Array.isArray(obj[k])) {
-          setField(field + '.' + k, obj[k]);
+          setField(field + '.' + k, _defineProperty({}, key, obj[k]));
         }
       } else {
         recursive.shift();
-        setObjectFieldsValue.apply(undefined, [field + '.' + k, obj[k]].concat(recursive));
+        setObjectFieldsValue.apply(undefined, [field + '.' + k, obj[k], key].concat(recursive));
       }
     });
   };
 
   var objectFieldsKeyFinder = function objectFieldsKeyFinder(obj, fieldObject, key) {
     Object.keys(fieldObject).map(function (k) {
-      if (fieldObject[k] && fieldObject[k][key]) {
+      if (fieldObject[k]) {
         obj[k] = fieldObject[k][key];
       }
       if (_typeof(fieldObject[k]) === 'object') {

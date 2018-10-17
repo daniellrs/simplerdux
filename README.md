@@ -169,8 +169,8 @@ const objPerson = getObjectFieldsKey( 'person' );
 console.log( objPerson ); // {name: 'Dylan', age: 35}
 ```
 
-**`setObjectFieldsValue( partOfField(String), obj(Object), ...recursive )`**
-Set the value of multiple fields of an object. The recursive option is optional and will enter in different levels of the object, if you want to enter 3 levels deep of the object then you will call 'setObjectFieldsValue( 'person', obj, true, true, true );'
+**`setObjectFieldsValue( partOfField(String), obj(Object), key(String), ...recursive )`**
+Set the value of multiple fields of an object. The default value of key is 'value'. The recursive option is optional and will enter in different levels of the object, if you want to enter 3 levels deep of the object then you will call 'setObjectFieldsValue( 'person', obj, true, true, true );'.
 
 ```
 const obj = {name: 'Brian', age: 29};
