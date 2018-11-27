@@ -1,6 +1,6 @@
 {
   "name": "simplerdux",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Simplerdux is a library to help you to create components or just put things in redux in a simple way.",
   "repository": {
     "type": "git",
@@ -64,9 +64,9 @@
     "react-test-renderer": "^15.5.4 || ^16.0.0"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
-    "prop-types": "^15.5.4"
+    "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0"
