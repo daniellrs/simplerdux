@@ -187,7 +187,7 @@ Clear the specified field.
 **`getAllFields( field(String) )`**
 Return all fields.
 
-**`clearAllFields( field(String) )`**
+**`clearAllFields()`**
 Clear all fields.
 
 **`getDefinedPropsField( field(String), prevFieldProps(Object) )`**

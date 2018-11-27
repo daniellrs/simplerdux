@@ -106,7 +106,8 @@
             destroyField: _fieldsRedux.destroyField,
             getDefinedPropsField: _fieldsRedux.getDefinedPropsField,
             getObjectFieldsKey: _fieldsRedux.getObjectFieldsKey,
-            setObjectFieldsValue: _fieldsRedux.setObjectFieldsValue
+            setObjectFieldsValue: _fieldsRedux.setObjectFieldsValue,
+            clearAllFields: _fieldsRedux.clearAllFields
           }, this.props));
         }
       }]);
