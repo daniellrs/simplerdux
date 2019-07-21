@@ -100,7 +100,7 @@ When we create a component, we need to use createField( component ).
 
 Then the component will be able to receive 4 props:
 
-| Props       | type           | Cool  |
+| Prop       | Type           | Description  |
 | ------------- |:-------------:| ------------- |
 | field      | string | field is a required field. Is the name of the field. |
 | defaultFieldValue      | string | default value of the field. |
