@@ -10,7 +10,6 @@ class App extends Component {
 
     setInterval(() => {
       Simplerdux.setState({message: 'TEST2'}, true)
-      Simplerdux.clearPersistedState()
     }, 3000)
   }
 

@@ -120,10 +120,6 @@ Simplerdux.restorePersistedState = function () {
   Simplerdux.store.dispatch(Simplerdux.actions.setState(persistence));
 };
 
-Simplerdux.clearPersistedState = function () {
-  localStorage.removeItem(Simplerdux.localStoragePersistenceName);
-};
-
 Simplerdux.getState = function () {
   if (!Simplerdux.store) {
     console.error('You have to set simplerdux store before call getState()');
@@ -154,6 +150,7 @@ Simplerdux.clearState = function () {
   }
 
   Simplerdux.store.dispatch(Simplerdux.actions.clearState());
+  localStorage.removeItem(Simplerdux.localStoragePersistenceName);
 };
 
 Simplerdux.bind = function (Component) {
@@ -196,6 +193,9 @@ Simplerdux.Provider = function (_ref) {
     React.createElement(AppComponent, null)
   );
 };
+
+
+window.simplerdux = Simplerdux;
 
 module.exports = Simplerdux;
 //# sourceMappingURL=index.js.map

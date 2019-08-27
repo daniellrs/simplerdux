@@ -83,5 +83,4 @@ class App extends Component {
 | ------------- | ------------- |
 | setState(data, persist)      | Set data to Simplerdux state. First param is the data. Second param tells to Simplerdux if the data should persist. |
 | getState()      | Returns an object with the stored data. |
-| clearState()      | Clears all data. |
-| clearPersistedState()      | Clears all persisted data. |
+| clearState()      | Clears all persisted and non-persisted data. |

@@ -51,10 +51,6 @@ export default class Simplerdux {
     Simplerdux.store.dispatch(Simplerdux.actions.setState(persistence))
   }
 
-  static clearPersistedState = () => {
-    localStorage.removeItem(Simplerdux.localStoragePersistenceName)
-  }
-
   static getState = () => {
     if(!Simplerdux.store) {
       console.error('You have to set simplerdux store before call getState()')
@@ -85,6 +81,7 @@ export default class Simplerdux {
     }
 
     Simplerdux.store.dispatch(Simplerdux.actions.clearState())
+    localStorage.removeItem(Simplerdux.localStoragePersistenceName)
   }
 
   static bind = ( Component ) => {
@@ -121,3 +118,5 @@ export default class Simplerdux {
     )
   }
 }
+
+window.simplerdux = Simplerdux
