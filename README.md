@@ -54,7 +54,7 @@ class App extends Component {
 }
 ```
 
-### 3. If you want that the data persist
+### 4. If you want that the data persist
 
 Pass true as second parameter in setState.
 
