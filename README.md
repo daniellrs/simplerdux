@@ -1,31 +1,87 @@
-# simplerdux
+# Simplerdux
 
-> 
-
-[![NPM](https://img.shields.io/npm/v/simplerdux.svg)](https://www.npmjs.com/package/simplerdux) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-## Install
-
-```bash
-npm install --save simplerdux
-```
+Simplerdux is a library to help you to put things in redux in a simpler way. Beside that you can easily persist data between browser refreshes.
+With Simplerdux you don't need to create reducer.js and action.js files, just let Simplerdux deal with that for you.
 
 ## Usage
 
-```jsx
-import React, { Component } from 'react'
+Here is what you need to do to make it work.
+**You need to have redux and react-redux installed in your project.**
 
-import MyComponent from 'simplerdux'
+### 1. Install the package
 
-class Example extends Component {
+```
+npm install simplerdux --save
+or
+yarn add simplerdux
+```
+
+### 2. Initialize Simplerdux in your app
+
+Do that in index.js file:
+
+```
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+
+import Simplerdux from 'simplerdux'
+
+ReactDOM.render(<Simplerdux.Provider app={App} />, document.getElementById('root'))
+
+```
+
+### 3. Now just use it!
+
+You can call Simplerdux global state on any Component of your application.
+
+```
+import Simplerdux from 'simplerdux'
+
+class App extends Component {
+
+  componentDidMount() {
+    Simplerdux.setState({message: 'Simplerdux is working!'})
+  }
+
   render () {
     return (
-      <MyComponent />
+      <div>
+        {Simplerdux.getState().message}
+      </div>
     )
   }
 }
 ```
 
-## License
+### 3. If you want that the data persist
 
-MIT © [daniellrs](https://github.com/daniellrs)
+Pass true as second parameter in setState.
+
+```
+import Simplerdux from 'simplerdux'
+
+class App extends Component {
+
+  componentDidMount() {
+    Simplerdux.setState({message: 'This data will persist'}, true)
+  }
+
+  render () {
+    return (
+      <div>
+        {Simplerdux.getState().message}
+      </div>
+    )
+  }
+}
+```
+
+## Simplerdux properties
+
+| Method       | Description  |
+| ------------- | ------------- |
+| setState(data, persist)      | Set data to Simplerdux state. First param is the data. Second param tells to Simplerdux if the data should persist. |
+| getState()      | Returns an object with the stored data. |
+| clearState()      | Clears all data. |
+| cleanPersistedState()      | Clears all persisted data. |
