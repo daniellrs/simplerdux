@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
 
-import simplerdux from '../../dist/'
+import Simplerdux from '../../dist/'
 import Child from './Child';
 
 class App extends Component {
 
   componentDidMount() {
-    simplerdux.setState({message: 'TEST1'}, true)
+    Simplerdux.setState({message: 'TEST1'})
 
     setInterval(() => {
-      simplerdux.setState({message: 'TEST2'}, true)
+      Simplerdux.setState({message: 'TEST2'}, true)
+      Simplerdux.clearPersistedState()
     }, 3000)
   }
 
   render () {
     return (
       <div>
-        {simplerdux.getState().message}
+        {Simplerdux.getState().message}
         <Child />
       </div>
     )

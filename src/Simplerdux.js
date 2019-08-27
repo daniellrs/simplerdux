@@ -8,10 +8,10 @@ export default class Simplerdux {
 
   static actions = {
     setState: (state) => {
-      return {type: 'setState', state};
+      return {type: 'setState', state}
     },
     clearState: () => {
-      return {type: 'clearState'};
+      return {type: 'clearState'}
     }
   }
 
@@ -28,7 +28,7 @@ export default class Simplerdux {
           simplerdux: {}
         }
       default:
-        return state;
+        return state
     }
   }
 
@@ -51,7 +51,7 @@ export default class Simplerdux {
     Simplerdux.store.dispatch(Simplerdux.actions.setState(persistence))
   }
 
-  static cleanPersistedState = () => {
+  static clearPersistedState = () => {
     localStorage.removeItem(Simplerdux.localStoragePersistenceName)
   }
 
@@ -64,7 +64,7 @@ export default class Simplerdux {
     return Simplerdux.store.getState()['simplerdux']
   }
 
-  static setState = (obj, persist) => {
+  static setState = (data, persist) => {
     if(!Simplerdux.store) {
       console.error('You have to set simplerdux store before call setState()')
       return
@@ -72,10 +72,10 @@ export default class Simplerdux {
     
     if(persist) {
       const persistence = JSON.parse(localStorage.getItem(Simplerdux.localStoragePersistenceName) || '{}')
-      localStorage.setItem(Simplerdux.localStoragePersistenceName, JSON.stringify({...persistence, ...obj}))
+      localStorage.setItem(Simplerdux.localStoragePersistenceName, JSON.stringify({...persistence, ...data}))
     }
 
-    Simplerdux.store.dispatch(Simplerdux.actions.setState(obj))
+    Simplerdux.store.dispatch(Simplerdux.actions.setState(data))
   }
 
   static clearState = () => {

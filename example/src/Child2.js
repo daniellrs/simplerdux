@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import simplerdux from '../../dist/'
+import Simplerdux from '../../dist/'
 
 export class Child2 extends Component {
   render() {
     return (
       <div>
-        {simplerdux.getState().message}
+        {Simplerdux.getState().message}
       </div>
     )
   }

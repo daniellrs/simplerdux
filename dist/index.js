@@ -120,7 +120,7 @@ Simplerdux.restorePersistedState = function () {
   Simplerdux.store.dispatch(Simplerdux.actions.setState(persistence));
 };
 
-Simplerdux.cleanPersistedState = function () {
+Simplerdux.clearPersistedState = function () {
   localStorage.removeItem(Simplerdux.localStoragePersistenceName);
 };
 
@@ -133,7 +133,7 @@ Simplerdux.getState = function () {
   return Simplerdux.store.getState()['simplerdux'];
 };
 
-Simplerdux.setState = function (obj, persist) {
+Simplerdux.setState = function (data, persist) {
   if (!Simplerdux.store) {
     console.error('You have to set simplerdux store before call setState()');
     return;
@@ -141,10 +141,10 @@ Simplerdux.setState = function (obj, persist) {
 
   if (persist) {
     var persistence = JSON.parse(localStorage.getItem(Simplerdux.localStoragePersistenceName) || '{}');
-    localStorage.setItem(Simplerdux.localStoragePersistenceName, JSON.stringify(_extends({}, persistence, obj)));
+    localStorage.setItem(Simplerdux.localStoragePersistenceName, JSON.stringify(_extends({}, persistence, data)));
   }
 
-  Simplerdux.store.dispatch(Simplerdux.actions.setState(obj));
+  Simplerdux.store.dispatch(Simplerdux.actions.setState(data));
 };
 
 Simplerdux.clearState = function () {

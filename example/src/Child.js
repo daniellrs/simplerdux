@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 
-import simplerdux from '../../dist/'
-import Child2 from './Child2';
+import Simplerdux from '../../dist/'
+import Child2 from './Child2'
 
-export class Child extends Component {
-  render() {
-    console.log('renderizado')
+export default class Child extends Component {
+
+  componentDidMount() {
+    Simplerdux.setState({m: 'Simplerdux is working!'}, true)
+  }
+
+  render () {
     return (
       <div>
-        {simplerdux.getState().message}
+        {Simplerdux.getState().m}
         <Child2 />
       </div>
     )
   }
 }
-
-export default Child
