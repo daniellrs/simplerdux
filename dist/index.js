@@ -1,49 +1,201 @@
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(['exports', './fieldsRedux', './createField', './fieldsReduxStore', './reducers', './fieldsState'], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(exports, require('./fieldsRedux'), require('./createField'), require('./fieldsReduxStore'), require('./reducers'), require('./fieldsState'));
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports, global.fieldsRedux, global.createField, global.fieldsReduxStore, global.reducers, global.fieldsState);
-    global.index = mod.exports;
-  }
-})(this, function (exports, _fieldsRedux, _createField, _fieldsReduxStore, _reducers, _fieldsState) {
-  'use strict';
+'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = _interopDefault(require('react'));
+var redux = require('redux');
+var reactRedux = require('react-redux');
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
   });
-  exports.setObjectFieldsValue = exports.fieldsState = exports.fieldsReduxReducer = exports.fieldsReduxStore = exports.createField = exports.getAllFields = exports.clearAllFields = exports.getDefinedPropsField = exports.destroyField = exports.setField = exports.getField = exports.fieldChangeListener = exports.getObjectFieldsKey = exports.initializeField = undefined;
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
 
-  var _createField2 = _interopRequireDefault(_createField);
-
-  var _fieldsReduxStore2 = _interopRequireDefault(_fieldsReduxStore);
-
-  var _reducers2 = _interopRequireDefault(_reducers);
-
-  var _fieldsState2 = _interopRequireDefault(_fieldsState);
-
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-      default: obj
-    };
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
 
-  exports.initializeField = _fieldsRedux.initializeField;
-  exports.getObjectFieldsKey = _fieldsRedux.getObjectFieldsKey;
-  exports.fieldChangeListener = _fieldsRedux.fieldChangeListener;
-  exports.getField = _fieldsRedux.getField;
-  exports.setField = _fieldsRedux.setField;
-  exports.destroyField = _fieldsRedux.destroyField;
-  exports.getDefinedPropsField = _fieldsRedux.getDefinedPropsField;
-  exports.clearAllFields = _fieldsRedux.clearAllFields;
-  exports.getAllFields = _fieldsRedux.getAllFields;
-  exports.createField = _createField2.default;
-  exports.fieldsReduxStore = _fieldsReduxStore2.default;
-  exports.fieldsReduxReducer = _reducers2.default;
-  exports.fieldsState = _fieldsState2.default;
-  exports.setObjectFieldsValue = _fieldsRedux.setObjectFieldsValue;
-});
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+var Simplerdux = function Simplerdux() {
+  classCallCheck(this, Simplerdux);
+};
+
+Simplerdux.localStoragePersistenceName = 'simplerdux-persistence';
+Simplerdux.store = undefined;
+Simplerdux.actions = {
+  setState: function setState(state) {
+    return { type: 'setState', state: state };
+  },
+  clearState: function clearState() {
+    return { type: 'clearState' };
+  }
+};
+
+Simplerdux.reducer = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { simplerdux: {} };
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'setState':
+      return _extends({}, state, {
+        simplerdux: _extends({}, state.simplerdux, action.state)
+      });
+    case 'clearState':
+      return _extends({}, state, {
+        simplerdux: {}
+      });
+    default:
+      return state;
+  }
+};
+
+Simplerdux.setStore = function (providedStore) {
+  Simplerdux.store = providedStore;
+  Simplerdux.restorePersistedState();
+};
+
+Simplerdux.getStore = function () {
+  return Simplerdux.store;
+};
+
+Simplerdux.restorePersistedState = function () {
+  if (!Simplerdux.store) {
+    console.error('You have to set simplerdux store before call restorePersistedState()');
+    return;
+  }
+
+  var persistence = JSON.parse(localStorage.getItem(Simplerdux.localStoragePersistenceName) || '{}');
+  Simplerdux.store.dispatch(Simplerdux.actions.setState(persistence));
+};
+
+Simplerdux.cleanPersistedState = function () {
+  localStorage.removeItem(Simplerdux.localStoragePersistenceName);
+};
+
+Simplerdux.getState = function () {
+  if (!Simplerdux.store) {
+    console.error('You have to set simplerdux store before call getState()');
+    return;
+  }
+
+  return Simplerdux.store.getState()['simplerdux'];
+};
+
+Simplerdux.setState = function (obj, persist) {
+  if (!Simplerdux.store) {
+    console.error('You have to set simplerdux store before call setState()');
+    return;
+  }
+
+  if (persist) {
+    var persistence = JSON.parse(localStorage.getItem(Simplerdux.localStoragePersistenceName) || '{}');
+    localStorage.setItem(Simplerdux.localStoragePersistenceName, JSON.stringify(_extends({}, persistence, obj)));
+  }
+
+  Simplerdux.store.dispatch(Simplerdux.actions.setState(obj));
+};
+
+Simplerdux.clearState = function () {
+  if (!Simplerdux.store) {
+    console.error('You have to set simplerdux store before call clearState()');
+    return;
+  }
+
+  Simplerdux.store.dispatch(Simplerdux.actions.clearState());
+};
+
+Simplerdux.bind = function (Component) {
+  var SimplerduxComponent = function (_React$Component) {
+    inherits(SimplerduxComponent, _React$Component);
+
+    function SimplerduxComponent() {
+      classCallCheck(this, SimplerduxComponent);
+      return possibleConstructorReturn(this, (SimplerduxComponent.__proto__ || Object.getPrototypeOf(SimplerduxComponent)).apply(this, arguments));
+    }
+
+    createClass(SimplerduxComponent, [{
+      key: 'render',
+      value: function render() {
+        return React.createElement(Component, this.props);
+      }
+    }]);
+    return SimplerduxComponent;
+  }(React.Component);
+
+  var mapStateToProps = function mapStateToProps(state) {
+    return { simplerdux: state['simplerdux'] };
+  };
+
+  return reactRedux.connect(mapStateToProps)(SimplerduxComponent);
+};
+
+Simplerdux.Provider = function (_ref) {
+  var app = _ref.app;
+
+
+  var store = redux.createStore(Simplerdux.reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  Simplerdux.setStore(store);
+
+  var AppComponent = Simplerdux.bind(app);
+
+  return React.createElement(
+    reactRedux.Provider,
+    { store: store },
+    React.createElement(AppComponent, null)
+  );
+};
+
+module.exports = Simplerdux;
+//# sourceMappingURL=index.js.map
